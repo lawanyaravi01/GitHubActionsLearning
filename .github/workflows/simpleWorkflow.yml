@@ -2,13 +2,27 @@ name: simple workflow
 
 on:
   workflow_dispatch: 
+  push:
+    branches:
+      - main
 
 jobs:
   job1:
-    name: job1
+    name: self hosted runner job
+    runs-on: self-hosted
+    steps:
+      - name: self hosted runner step 1
+        id: selfHostedRunnerStep
+        shell: cmd
+        run: |
+          echo this is my first step of self hosted job1
+          echo and this runs on my self hosted runner
+      
+  job2:
+    name: job2
     runs-on: ubuntu-latest
     steps:
-      - run: echo "step 1 of job 1"
+      - run: echo "step 1 of job 2"
         name: step 1
         id: stepId
       - name: shellStep
